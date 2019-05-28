@@ -1,8 +1,0 @@
-FROM raspbian/stetch
-WORKDIR /shirka_ears
-
-# copy all files from local
-COPY . .
-
-RUN npm install
-

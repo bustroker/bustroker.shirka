@@ -14,13 +14,21 @@ client.on("connect", () => {
     client.subscribe(config.topicShirkaOk);
 });
 
+var playFile = function(localFileName){
+    exec("omxplayer -o local " + localFileName);
+}
+
 var sayAck = function(){
-    exec("omxplayer -o local ShirkaImHere.wav");
+    playFile("ShirkaImHere.wav");
 }
 
 var sayOk = function(){
-    exec("omxplayer -o local ShirkaOK.wav");
+    playFile("ShirkaOK.wav");
 };
+
+var sayHi = function(){
+    playFile("ShirkaOK.wav");
+}
 
 client.on("message", (topic, message) => {
     if(topic == config.topicShirkaAck){
@@ -34,4 +42,4 @@ client.on("message", (topic, message) => {
     }
 });
 
-console.log("Executing shirka_voice with config: " + JSON.stringify(config));
+sayHi();

@@ -1,3 +1,14 @@
 FROM raspbian/stetch
-WORKDIR app
 
+WORKDIR shirka_voice
+
+# If you are building your code for production
+# RUN npm install --only=production
+RUN npm install
+
+# copy all local files to WORKDIR
+COPY . .
+
+## EXPOSE 8080
+
+CMD ["npm", "run", "start_shirka_voice_background"]
