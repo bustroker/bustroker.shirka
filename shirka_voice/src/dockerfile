@@ -1,0 +1,3 @@
+FROM raspbian/stetch
+WORKDIR app
+

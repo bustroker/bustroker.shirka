@@ -1,0 +1,18 @@
+{
+  "name": "shirka_ears",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start_shirka_ears": "nodejs main.js",
+    "start_shirka_ears_background": "nohup npm run start_shirka_ears >/dev/null 2>&1 &",
+    "deploy": "scp 0520.dic 0520.lm main.js package.json pi@192.168.1.106:/home/pi/Apps/shirka_ears"
+  },
+  "author": "Luis Mesa",
+  "license": "ISC",
+  "dependencies": {
+    "mqtt": "^2.18.8",
+    "pocketsphinx-continuous": "^1.1.0"
+  }
+}

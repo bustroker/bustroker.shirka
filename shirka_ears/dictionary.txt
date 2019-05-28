@@ -1,0 +1,4 @@
+shirka
+shirka status
+shirka lights on
+shirka lights off

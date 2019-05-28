@@ -1,0 +1,18 @@
+{
+  "name": "shirka_voice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start_shirka_voice": "nodejs main.js",
+    "start_shirka_voice_background": "nohup npm run start_shirka_voice >/dev/null 2>&1 &",
+    "deploy": "scp main.js package.json Hi.wav ShirkaOK.wav ShirkaItsDone.wav ShirkaImHere.wav pi@192.168.1.106:/home/pi/Apps/shirka_voice"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "mqtt": "^2.18.8"
+  }
+}
