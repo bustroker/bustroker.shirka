@@ -16,20 +16,15 @@ sudo apt-get update
 ```
 
 ### install nodered
-```
-sudo apt-get install nodered
-sudo apt-get install npm
-sudo apt-get install nano git-core python-dev bison libasound2-dev libportaudio-dev python-pyaudio --yes
-sudo apt-get remove python-pip
-sudo easy_install pip
-```
+bash <(curl -sL https://raw.githubusercontent.com/node-red/raspbian-deb-package/master/resources/update-nodejs-and-nodered)
+
+_from https://nodered.org/docs/hardware/raspberrypi_
+
 ### run nodered
-```
-node-red
-```
+_"You can now start Node-RED with the command  node-red-start then point your browser to localhost:1880"_
 
 ### install pocketsphinx
-https://howchoo.com/g/ztbhyzfknze/how-to-install-pocketsphinx-on-a-raspberry-pi
+https://cmusphinx.github.io/wiki/raspberrypi/
 
 ### crear modelo con palabras a reconocer
 Ver el paso 8 en:
