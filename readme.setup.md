@@ -24,7 +24,12 @@ _from https://nodered.org/docs/hardware/raspberrypi_
 _"You can now start Node-RED with the command  node-red-start then point your browser to localhost:1880"_
 
 ### install pocketsphinx
+(this one fails at running pocketsphinx_continuous -inmic yes)
 https://cmusphinx.github.io/wiki/raspberrypi/
+
+
+- try this one..
+https://www.alatortsev.com/2018/06/28/speech-processing-on-raspberry-pi-3-b/
 
 ### crear modelo con palabras a reconocer
 Ver el paso 8 en:
