@@ -6,14 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start_shirka_voice": "nodejs main.js",
-    "start_shirka_voice_background": "nohup npm run start_shirka_voice >/dev/null 2>&1 &",
-    "deploy": "scp main.js package.json doorOpen.wav doorClosed.wav hi.wav ok.wav itsDone.wav imHere.wav hello.wav pi@192.168.1.100:/home/pi/Apps/shirka_voice",
-    "deploy_full": ""
+    "start_shirka_voice_pm2": "pm2 start --name shirka_voice main.js",
+    "start_shirka_voice_nohup": "nohup npm run start_shirka_voice >/dev/null 2>&1 &",
+    "deploy": "scp main.js package.json package-lock.json doorOpen.wav doorClosed.wav hi.wav ok.wav itsDone.wav imHere.wav hello.wav pi@192.168.1.103:/home/pi/shirka/shirka_voice"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "child_process": "^1.0.2",
+    "forever": "^1.0.0",
     "mqtt": "^2.18.8"
   }
 }

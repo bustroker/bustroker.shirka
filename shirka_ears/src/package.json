@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start_shirka_ears": "nodejs main.js",
+    "start_shirka_ears_pm2": "pm2 start --name shirka_ears main.js",
     "start_shirka_ears_background": "nohup npm run start_shirka_ears >/dev/null 2>&1 &",
-    "deploy": "scp 0520.dic 0520.lm main.js package.json package-lock.json pi@192.168.1.100:/home/pi/shirka/shirka_ears"
+    "deploy": "scp 0520.dic 0520.lm main.js package.json package-lock.json pi@192.168.1.103:/home/pi/shirka/shirka_ears"
   },
   "author": "Luis Mesa",
   "license": "ISC",

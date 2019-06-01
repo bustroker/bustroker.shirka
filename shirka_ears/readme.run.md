@@ -14,7 +14,7 @@ cd /home/pi/Apps/shirka_ears
 npm run start_shirka_ears
 ```
 ### run shirka_voice
+- install 
 ```
-cd /home/pi/Apps/shirka_voice
-npm run start_shirka_voice
+sudo apt-get install omxplayer
 ```

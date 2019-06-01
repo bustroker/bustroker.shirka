@@ -4,43 +4,36 @@
 
     const config = {
         mqttServer : "mqtt://localhost",
-        topicHello: "shirka/voice/hello",
-        topicOk: "shirka/voice/ok",
-        topicDoorOpen: "shirka/voice/doorOpen",
-        topicDoorClosed: "shirka/voice/doorClosed",
-        topicHi: "shirka/voice/hi"
+        subscribeTopicTTS: "shirka/voice/tts"
     }
     
     var client  = mqtt.connect(config.mqttServer);
 
     client.on("connect", () => {
-        client.subscribe(config.topicHello);
-        client.subscribe(config.topicOk);
-        client.subscribe(config.topicDoorClosed);
-        client.subscribe(config.topicDoorOpen);
-        client.subscribe(config.topicHi);
+        client.subscribe(config.subscribeTopicTTS);
     });
 
     client.on("message", (topic, message) => {
         console.log("received message from topic '"+topic+"' => '"+message+"'")
-        switch(topic) {
-            case config.topicOk:
+        
+        switch(message.toString()) {
+            case "ok":
               sayOk();
               break;
-            case config.topicHi:
+            case "hi":
                 sayHi();
                 break;
-            case config.topicHello:
+            case "hello":
               sayHello();
               break;
-            case config.topicDoorOpen:
+            case "door open":
                 sayDoorOpen();
                 break;
-            case config.topicDoorClosed:
+            case "door closed":
                 sayDoorClosed();
                 break;
             default:
-              console.log("Unrecognized topic => " + topic);
+              console.log("Unknown message => " + message);
           }
     });
 
@@ -73,6 +66,8 @@
         playFile("doorClosed.wav");
     }
 
+    console.log("running shirka_voice with config:");
+    console.log(JSON.stringify(config));
 
     sayImHere();
 })();

@@ -29,7 +29,7 @@ cat /proc/asound/cards
 ```
 arecord -l
 ```
-You will see device card1, device0. Use plughw:1,0 to represent
+_"You will see device card1, device0. Use plughw:1,0 to represent"_
 
 - record 3 seconds
 arecord -D plughw:1,0 -d 3 test.wav
@@ -40,14 +40,17 @@ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
 
-
-### install nodered
-bash <(curl -sL https://raw.githubusercontent.com/node-red/raspbian-deb-package/master/resources/update-nodejs-and-nodered)
-
-_from https://nodered.org/docs/hardware/raspberrypi_
-
-### run nodered
-_"You can now start Node-RED with the command  node-red-start then point your browser to localhost:1880"_
+### install pm2 (to run apps in background)
+```
+sudo npm install pm2 -g
+```
+- pm2 commands (https://www.npmjs.com/package/pm2)
+```
+pm2 start --name [name] main.js
+pm2 stop     <app_name|id|'all'|json_conf>
+pm2 restart  <app_name|id|'all'|json_conf>
+pm2 delete   <app_name|id|'all'|json_conf>
+```
 
 ### install pocketsphinx
 - first install  python-dev
@@ -91,20 +94,27 @@ mosquitto_sub -h localhost -t "micro/commands"
 ```
 mosquitto_pub -h localhost -t "test/message" -m "Hello, world"
 ```
-### instalar cliente mqtt para node
-```
-npm install mqtt --save
-```
 ### play wav file
 ```
 omxplayer -o local example.wav
 ```
-### run node-red forever from console
+
+
+### install nodered
+bash <(curl -sL https://raw.githubusercontent.com/node-red/raspbian-deb-package/master/resources/update-nodejs-and-nodered)
+
+_from https://nodered.org/docs/hardware/raspberrypi_
+
+### run nodered
+_"You can now start Node-RED with the command  node-red-start then point your browser to localhost:1880"_
+
+
+### run node-red as a service on startup
 ```
-nohup node-red &
+sudo systemctl enable nodered.service
 ```
 - listening in:
-http://192.168.1.106:1880
+http://localhost:1880
 
 #### run node-red forever from console, without writing logs
 ```
