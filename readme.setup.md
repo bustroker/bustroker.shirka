@@ -13,7 +13,33 @@ https://www.npmjs.com/package/pocketsphinx-continuous
 ### update raspbian
 ```
 sudo apt-get update
+sudo apt-get upgrade
 ```
+
+### sound and micro
+- list usb devices
+```
+lsusb
+```
+- audio card config. should display alsa card and the micro
+```
+cat /proc/asound/cards
+```
+- list recording devices
+```
+arecord -l
+```
+You will see device card1, device0. Use plughw:1,0 to represent
+
+- record 3 seconds
+arecord -D plughw:1,0 -d 3 test.wav
+
+### install node npm
+```
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
+
 
 ### install nodered
 bash <(curl -sL https://raw.githubusercontent.com/node-red/raspbian-deb-package/master/resources/update-nodejs-and-nodered)
@@ -24,38 +50,38 @@ _from https://nodered.org/docs/hardware/raspberrypi_
 _"You can now start Node-RED with the command  node-red-start then point your browser to localhost:1880"_
 
 ### install pocketsphinx
-(this one fails at running pocketsphinx_continuous -inmic yes)
-https://cmusphinx.github.io/wiki/raspberrypi/
+- first install  python-dev
+```
+sudo apt-get install python-dev
+```
 
+- install pulseaudio
+```
+sudo apt-get install pulseaudio
+sudo reboot now
+```
+- install phocketsphinx (from https://www.alatortsev.com/2018/06/28/speech-processing-on-raspberry-pi-3-b/)
 
-- try this one..
-https://www.alatortsev.com/2018/06/28/speech-processing-on-raspberry-pi-3-b/
-
-### crear modelo con palabras a reconocer
-Ver el paso 8 en:
-https://medium.com/@ranjanprj/for-some-time-now-i-have-been-thinking-really-hard-to-build-a-diy-study-aid-for-children-which-uses-17ce90e72f43
+#### web para generar el modelo a partir del diccionario (dictionary.txt)
+http://www.speech.cs.cmu.edu/tools/lmtool-new.html
 
 de aquí se obtienen los archivos 'lm' y 'dic' a partir de 'dictionary.txt'
-
-#### web para generar el modelo a partir del diccionario
-http://www.speech.cs.cmu.edu/tools/lmtool-new.html
 
 ### run pocketsphinx con modelo en inglés, y los archivos lm y dic generados.
 ### saca los comandos que recibe por la consola.
 ```
-pocketsphinx_continuous -hmm  /usr/local/share/pocketsphinx/model/en-us/en-us -lm /home/pi/Apps/pocketsphinx_models/0821/TAR0821/0821.lm -dict /home/pi/Apps/pocketsphinx_models/0821/TAR0821/0821.dic -inmic yes
+pocketsphinx_continuous -hmm  /usr/local/share/pocketsphinx/model/en-us/en-us -lm /home/pi/shirka/shirka_ears/0520.lm -dict /home/pi/shirka/shirka_ears/0520.dic -inmic yes
 ```
 ### install servidor y clientes de mosquitto 
 ```
-sudo apt install mosquitto mosquitto-clients
+sudo apt update
+sudo apt install -y mosquitto mosquitto-clients
+sudo systemctl status mosquitto
 ```
+
 - ejecutar momsquitto
 ```
 sudo systemctl enable mosquitto
-```
-- estado mosquitto
-```
-sudo systemctl status mosquitto
 ```
 - suscribir la consola a un topic
 ```

@@ -4,44 +4,75 @@
 
     const config = {
         mqttServer : "mqtt://localhost",
-        topicShirkaAck: "shirkaVoice/ack",
-        topicShirkaOk: "shirkaVoice/ok"
+        topicHello: "shirka/voice/hello",
+        topicOk: "shirka/voice/ok",
+        topicDoorOpen: "shirka/voice/doorOpen",
+        topicDoorClosed: "shirka/voice/doorClosed",
+        topicHi: "shirka/voice/hi"
     }
     
     var client  = mqtt.connect(config.mqttServer);
 
     client.on("connect", () => {
-        client.subscribe(config.topicShirkaAck);
-        client.subscribe(config.topicShirkaOk);
+        client.subscribe(config.topicHello);
+        client.subscribe(config.topicOk);
+        client.subscribe(config.topicDoorClosed);
+        client.subscribe(config.topicDoorOpen);
+        client.subscribe(config.topicHi);
     });
+
+    client.on("message", (topic, message) => {
+        console.log("received message from topic '"+topic+"' => '"+message+"'")
+        switch(topic) {
+            case config.topicOk:
+              sayOk();
+              break;
+            case config.topicHi:
+                sayHi();
+                break;
+            case config.topicHello:
+              sayHello();
+              break;
+            case config.topicDoorOpen:
+                sayDoorOpen();
+                break;
+            case config.topicDoorClosed:
+                sayDoorClosed();
+                break;
+            default:
+              console.log("Unrecognized topic => " + topic);
+          }
+    });
+
 
     var playFile = function(localFileName){
         exec("omxplayer -o local " + localFileName);
     }
 
-    var sayAck = function(){
-        playFile("ShirkaImHere.wav");
+    var sayImHere = function(){
+        playFile("imHere.wav");
+    }
+
+    var sayHello = function(){
+        playFile("hello.wav");
     }
 
     var sayOk = function(){
-        playFile("ShirkaOK.wav");
+        playFile("ok.wav");
     };
 
     var sayHi = function(){
-        playFile("ShirkaOK.wav");
+        playFile("hi.wav");
     }
 
-    client.on("message", (topic, message) => {
-        if(topic == config.topicShirkaAck){
-            sayAck();
-        }
-        else if(topic == config.topicShirkaOk){
-            sayOk();      
-        }
-        else{
-            console.log("Unrecognized voice topic '"+topic+"'");
-        }
-    });
+    var sayDoorOpen = function(){
+        playFile("doorOpen.wav");
+    }
 
-    sayHi();
+    var sayDoorClosed = function(){
+        playFile("doorClosed.wav");
+    }
+
+
+    sayImHere();
 })();
