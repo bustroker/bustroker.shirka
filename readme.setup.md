@@ -52,7 +52,7 @@ pm2 restart  <app_name|id|'all'|json_conf>
 pm2 delete   <app_name|id|'all'|json_conf>
 ```
 
-### install pocketsphinx
+### install pocketsphinx (shirka_ears)
 - first install  python-dev
 ```
 sudo apt-get install python-dev
@@ -70,11 +70,17 @@ http://www.speech.cs.cmu.edu/tools/lmtool-new.html
 
 de aquí se obtienen los archivos 'lm' y 'dic' a partir de 'dictionary.txt'
 
-### run pocketsphinx con modelo en inglés, y los archivos lm y dic generados.
-### saca los comandos que recibe por la consola.
+#### run pocketsphinx con modelo en inglés, y los archivos lm y dic generados.
+#### saca los comandos que recibe por la consola.
 ```
 pocketsphinx_continuous -hmm  /usr/local/share/pocketsphinx/model/en-us/en-us -lm /home/pi/shirka/shirka_ears/0520.lm -dict /home/pi/shirka/shirka_ears/0520.dic -inmic yes
 ```
+
+## install espeak (shirka_voice)
+´´´
+sudo apt-get install espeak
+´´´
+
 ### install servidor y clientes de mosquitto 
 ```
 sudo apt update

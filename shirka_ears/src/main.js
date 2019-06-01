@@ -1,12 +1,11 @@
 (function(){
-  var Psc = require('pocketsphinx-continuous');
+  var Psc = require("pocketsphinx-continuous");
   var mqtt = require("mqtt")
 
   const config = {
     mqttServer : "mqtt://localhost",
     publishCommandsTopic: "shirka/ears/commands",
-    publishHelloTopic: "shirka/ears/hello",
-    publishAckTopic: "shirka/ears/ack",
+    publishWakeUpTopic: "shirka/ears/wakeup",
     voiceRecognitionModelId : "0520"
   }
 
@@ -17,12 +16,8 @@
     client.publish(config.publishCommandsTopic, command);
   }
 
-  var publishAck = function(ackText){
-    client.publish(client.publishAckTopic, ackText);
-  }
-
-  var publishHello = function(){
-    client.publish(config.publishHelloTopic, "1");
+  var publishWakeUpMessage = function(){
+    client.publish(config.publishWakeUpTopic, "1");
   }
 
   var ps = new Psc({
@@ -30,31 +25,31 @@
     verbose: true // Setting this to true will give you a whole lot of debug output in your console.
   });
 
+  // ps.on("data", function(data){
+  //   var command = data.replace("shirka ", "");
+  //   publishCommand(command);
+  // })
+
   ps.on("shirka", function(data) {
-    publishCommand(data);
-    publishAck("shirka");
+    var command = data.replace("shirka ", "");
+    publishCommand(command);
   });
 
   ps.on("shirka status", function(data) {
-    publishCommand(data);
-    publishAck("status");
+    var command = data.replace("shirka ", "");
+    publishCommand(command);
   });
 
   ps.on("shirka lights on", function(data) {
-    publishCommand(data);
-    publishAck("lights on");
+    var command = data.replace("shirka ", "");
+    publishCommand(command);
   });
 
   ps.on("shirka lights off", function(data) {
-    publishCommand(data);
-    publishAck("lights off");
+    var command = data.replace("shirka ", "");
+    publishCommand(command);
   });
 
-
-  console.log("running shirka_ears with config:");
-  console.log(JSON.stringify(config) + "\n");
-  console.log("sending hello to " + config.publishHelloTopic);
-
-  publishHello();
+  publishWakeUpMessage();
 
 })();

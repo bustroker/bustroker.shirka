@@ -4,7 +4,8 @@
 
     const config = {
         mqttServer : "mqtt://localhost",
-        subscribeTopicTTS: "shirka/voice/tts"
+        subscribeTopicTTS: "shirka/voice/tts",
+        publishWakeUpTopic: "shirka/voice/wakeup"
     }
     
     var client  = mqtt.connect(config.mqttServer);
@@ -32,6 +33,21 @@
             case "door closed":
                 sayDoorClosed();
                 break;
+            case "lights on":
+                sayLightsOn();
+                break;
+            case "lights off":
+                sayLightsOff();
+                break;
+            case "i'm here":
+                sayImHere();
+                break;
+            case "hi i'm shirka voice":
+                    sayImShirkaVoice();
+                    break;
+            case "hi i'm shirka ears":
+                    sayImShirkaEars();
+                    break; 
             default:
               console.log("Unknown message => " + message);
           }
@@ -66,8 +82,25 @@
         playFile("doorClosed.wav");
     }
 
-    console.log("running shirka_voice with config:");
-    console.log(JSON.stringify(config));
+    var sayLightsOn = function(){
+        playFile("lightsOn.wav");
+    }
 
-    sayImHere();
+    var sayLightsOff = function(){
+        playFile("lightsOff.wav");
+    }
+
+    var sayImShirkaVoice = function(){
+        playFile("imShirkaVoice.wav");
+    }
+
+    var sayImShirkaEars = function(){
+        playFile("imShirkaEars.wav");
+    }
+
+    var publishWakeUpMessage = function(){
+        client.publish(config.publishWakeUpTopic, "1");
+      }
+    
+    publishWakeUpMessage();
 })();
