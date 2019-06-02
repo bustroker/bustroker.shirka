@@ -43,11 +43,11 @@
                 sayImHere();
                 break;
             case "hi i'm shirka voice":
-                    sayImShirkaVoice();
-                    break;
+                sayImShirkaVoice();
+                break;
             case "hi i'm shirka ears":
-                    sayImShirkaEars();
-                    break; 
+                sayImShirkaEars();
+                break; 
             default:
               console.log("Unknown message => " + message);
           }

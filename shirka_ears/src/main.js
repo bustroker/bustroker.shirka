@@ -31,21 +31,25 @@
   // })
 
   ps.on("shirka", function(data) {
+    data = data.toLowerCase();
     var command = data.replace("shirka ", "");
     publishCommand(command);
   });
 
   ps.on("shirka status", function(data) {
+    data = data.toLowerCase();
     var command = data.replace("shirka ", "");
     publishCommand(command);
   });
 
   ps.on("shirka lights on", function(data) {
+    data = data.toLowerCase();
     var command = data.replace("shirka ", "");
     publishCommand(command);
   });
 
   ps.on("shirka lights off", function(data) {
+    data = data.toLowerCase();
     var command = data.replace("shirka ", "");
     publishCommand(command);
   });
