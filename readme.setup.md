@@ -76,10 +76,24 @@ de aquí se obtienen los archivos 'lm' y 'dic' a partir de 'dictionary.txt'
 pocketsphinx_continuous -hmm  /usr/local/share/pocketsphinx/model/en-us/en-us -lm /home/pi/shirka/shirka_ears/0520.lm -dict /home/pi/shirka/shirka_ears/0520.dic -inmic yes
 ```
 
-## install espeak (shirka_voice)
-´´´
-sudo apt-get install espeak
-´´´
+### install pico TTS (shirka_voice)
+(http://manpages.ubuntu.com/manpages/precise/man1/pico2wave.1.html)
+(https://www.openhab.org/addons/voice/picotts/)
+```
+sudo apt-get install libttspico-utils
+```
+- commands
+```
+pico2vave --usage
+pico2wave -w hello.wav -l "" "hi shirka"
+```
+- voices
+German (de-DE)
+English, US (en-US)
+English, GB (en-GB)
+Spanish (es-ES)
+French (fr-FR)
+Italian (it-IT)
 
 ### install servidor y clientes de mosquitto 
 ```
@@ -100,32 +114,35 @@ mosquitto_sub -h localhost -t "micro/commands"
 ```
 mosquitto_pub -h localhost -t "test/message" -m "Hello, world"
 ```
-### play wav file
-```
-omxplayer -o local example.wav
-```
-
 
 ### install nodered
 bash <(curl -sL https://raw.githubusercontent.com/node-red/raspbian-deb-package/master/resources/update-nodejs-and-nodered)
 
 _from https://nodered.org/docs/hardware/raspberrypi_
 
-### run nodered
+#### run nodered
 _"You can now start Node-RED with the command  node-red-start then point your browser to localhost:1880"_
 
 
-### run node-red as a service on startup
+#### run node-red as a service on startup
 ```
 sudo systemctl enable nodered.service
 ```
 - listening in:
 http://localhost:1880
 
-#### run node-red forever from console, without writing logs
+## Cheat sheet
+
+### espeak 
+´´´
+sudo apt-get install espeak
+´´´
+
+### play wav file
 ```
-nohup node-red >/dev/null 2>&1 &
+omxplayer -o local example.wav
 ```
+
 ### página para generar las voces
 notevibes.com
 voz English(UK) Gabriela

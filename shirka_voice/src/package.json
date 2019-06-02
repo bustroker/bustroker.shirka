@@ -8,7 +8,7 @@
     "start_shirka_voice": "nodejs main.js",
     "start_shirka_voice_pm2": "pm2 start --name shirka_voice main.js",
     "start_shirka_voice_nohup": "nohup npm run start_shirka_voice >/dev/null 2>&1 &",
-    "deploy": "scp main.js package.json package-lock.json imShirkaEars.wav imShirkaVoice.wav lightsOn.wav lightsOff.wav doorOpen.wav doorClosed.wav hi.wav ok.wav itsDone.wav imHere.wav hello.wav pi@192.168.1.103:/home/pi/shirka/shirka_voice"
+    "deploy": "scp main.js package.json package-lock.json pi@192.168.1.103:/home/pi/shirka/shirka_voice"
   },
   "author": "",
   "license": "ISC",
