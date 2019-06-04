@@ -70,10 +70,15 @@ http://www.speech.cs.cmu.edu/tools/lmtool-new.html
 
 de aquí se obtienen los archivos 'lm' y 'dic' a partir de 'dictionary.txt'
 
-#### run pocketsphinx con modelo en inglés, y los archivos lm y dic generados.
-#### saca los comandos que recibe por la consola.
+#### run pocketsphinx 
+- con modelo en inglés, y los archivos lm y dic generados. saca los comandos que recibe por la consola.
 ```
 pocketsphinx_continuous -hmm  /usr/local/share/pocketsphinx/model/en-us/en-us -lm /home/pi/shirka/shirka_ears/0520.lm -dict /home/pi/shirka/shirka_ears/0520.dic -inmic yes
+```
+
+- en modo keyword (with "shirke", complains of not finding it in the dictionary)
+```
+pocketsphinx_continuous -keyphrase "basket" -kws_threshold 1e-50  -inmic yes
 ```
 
 ### install pico TTS (shirka_voice)
