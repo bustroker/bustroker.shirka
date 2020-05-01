@@ -135,9 +135,9 @@ http://localhost:1880
 ## Cheat sheet
 
 ### espeak 
-´´´
+```
 sudo apt-get install espeak
-´´´
+```
 
 ### play wav file
 ```
