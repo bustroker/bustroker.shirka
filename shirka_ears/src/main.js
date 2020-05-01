@@ -22,15 +22,15 @@
 
   var ps = new Psc({
     setId: config.voiceRecognitionModelId, 
-    verbose: true // Setting this to true will give you a whole lot of debug output in your console.
+    verbose: true // Setting this to true will provide a whole lot of debug output in your console.
   });
 
   ps.on("data", function(data) {
     data = data.toLowerCase();
-    var command = data.replace("shirka ", "");
+    var command = data;
     publishCommand(command);
   });
-
+  
   publishWakeUpMessage();
 
 })();

@@ -1,14 +1,10 @@
-
-
-## Setup RPi with pocketsphinx
+## Setup RPi with pocketsphinx from scratch
 interesting info:
 https://www.npmjs.com/package/pocketsphinx-continuous
 
-
-
-### install fresh Raspbian
-
-### enable ssh server
+### Prerequisits
+- install fresh Raspbian
+- enable ssh server
 
 ### update raspbian
 ```
@@ -40,11 +36,11 @@ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
 
-### install pm2 (to run apps in background)
+### install pm2 to run and apps in background
 ```
 sudo npm install pm2 -g
 ```
-- pm2 commands (https://www.npmjs.com/package/pm2)
+- pm2 commands ([official doc](https://www.npmjs.com/package/pm2))
 ```
 pm2 start --name [name] main.js
 pm2 stop     <app_name|id|'all'|json_conf>
@@ -76,7 +72,7 @@ de aquí se obtienen los archivos 'lm' y 'dic' a partir de 'dictionary.txt'
 pocketsphinx_continuous -hmm  /usr/local/share/pocketsphinx/model/en-us/en-us -lm /home/pi/shirka/shirka_ears/0520.lm -dict /home/pi/shirka/shirka_ears/0520.dic -inmic yes
 ```
 
-- en modo keyword (with "shirke", complains of not finding it in the dictionary)
+- en modo keyword (with "shirka" it complains of not finding it in the dictionary)
 ```
 pocketsphinx_continuous -keyphrase "basket" -kws_threshold 1e-50  -inmic yes
 ```
@@ -133,7 +129,7 @@ _"You can now start Node-RED with the command  node-red-start then point your br
 ```
 sudo systemctl enable nodered.service
 ```
-- listening in:
+listening in:
 http://localhost:1880
 
 ## Cheat sheet
@@ -148,6 +144,6 @@ sudo apt-get install espeak
 omxplayer -o local example.wav
 ```
 
-### página para generar las voces
+### page to generate the voice
 notevibes.com
 voz English(UK) Gabriela
